@@ -1,4 +1,7 @@
 import { useRef, useState } from "react";
+import {ContentCopy} from '@mui/icons-material'
+import { OfficeLocationCard } from "./OfficeLocationCard";
+import { Button } from "@mui/material";
 
 export function Learning() {
   let companyName = "NEOSOFT";
@@ -77,22 +80,13 @@ export function Learning() {
           return <option>{item.city}</option>;
         })}
       </select> */}
-      <div className="shadow-md shadow-slate-400 m-2 p-2">
-        {showAddress(locationIndex)}
+      <div className="shadow-md shadow-slate-400 m-2 p-2 flex">
+      <Button onClick={($event)=>{$event.currentTarget = "none"}}><ContentCopy /></Button> {showAddress(locationIndex)}
       </div>
       <div className="flex flex-wrap gap-4">
         {locations.map((loc, index) => {
           return (
-            <div
-              key={index}
-              className=" bg-blue-100 bg-opacity-1 rounded-sm shadow-md shadow-slate-400 h-22 w-56 m-2 p-8 px-3 hover:scale-110 hover:translate-x-5 transition-all duration-100  text-center"
-              onClick={() => {
-                setLocationIndex(index);
-              }}
-            >
-                <h4 className="text-xl">{loc.city}</h4><br />
-              <address>{loc.address}</address>
-            </div>
+                <OfficeLocationCard office={loc} index={index} setLocation={setLocationIndex} />
           );
         })}
       </div>
