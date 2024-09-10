@@ -1,11 +1,13 @@
 import { useRef, useState } from "react";
-import {ContentCopy} from '@mui/icons-material'
+import {Check, ContentCopy,CopyAll} from '@mui/icons-material'
 import { OfficeLocationCard } from "./OfficeLocationCard";
 import { Button } from "@mui/material";
+import { useMemo } from "react";
 
 export function Learning() {
   let companyName = "NEOSOFT";
-  let [locationIndex, setLocationIndex] = useState(0);
+  const [locationIndex, setLocationIndex] = useState(0);
+  const [city,setCity] = useState('Mumbai')
   const showAddress = (index) => {
     return (
       <>
@@ -20,12 +22,12 @@ export function Learning() {
         "The Ruby Tower, Senapati Bapat Marg, Dadar West, Mumbai, Maharashtra 400028",
     },
     {
-      city: "Parel, Mumbai",
+      city: "Mumbai",
       address:
         "Business Arcade, Sayani Road, Opp. S. T Bus Stand, Lower Parel, Mumbai, Maharashtra 400013",
     },
     {
-      city: "Rabale, Mumbai",
+      city: "Mumbai",
       address:
         "Sigma IT Park, Unit No. 501, TTC Industrial Area, Rabale, Navi Mumbai, Maharashtra 400701",
     },
@@ -70,25 +72,38 @@ export function Learning() {
         "N-Heights buildings, AWFIS, 6th floor Siddiq Nagar, HITEC City, Hyderabad, Telangana 500081",
     },
   ];
+  
+  const [copyButton,changeCopyButton] = useState(true)
+
+  const cities = useMemo(() => {
+    const citySet = new Set(locations.map((location) => location.city));
+    return Array.from(citySet);
+  }, [locations]);
+
 
   return (
     <div className="p-4">
       <h2 className=" text-4xl ">{companyName}</h2>
       <h4 className="my-3 underline">Offices :</h4>
-      {/* <select className="p-2 bg-blue-100 rounded-md ">
-        {locations.map((item) => {
-          return <option>{item.city}</option>;
+      <select className="p-2 bg-blue-100 rounded-md " onChange={(event)=>{setCity(event.target.value);changeCopyButton(true)}}>
+        {
+        cities.map((item,index) => {
+          return <option key={index}>{item}</option>;
         })}
-      </select> */}
+      </select>
       <div className="shadow-md shadow-slate-400 m-2 p-2 flex">
-      <Button onClick={($event)=>{$event.currentTarget = "none"}}><ContentCopy /></Button> {showAddress(locationIndex)}
+        {copyButton?<Button onClick={()=>changeCopyButton(false)}><ContentCopy /></Button>:<Check style={{color:'green'}}~/>}
+       {showAddress(locationIndex)}
       </div>
       <div className="flex flex-wrap gap-4">
-        {locations.map((loc, index) => {
-          return (
-                <OfficeLocationCard office={loc} index={index} setLocation={setLocationIndex} />
-          );
-        })}
+        {
+          locations.filter((item,index)=>item.city.toLowerCase().includes(city.toLowerCase())).map((loc, index) => {
+            return (
+                  <OfficeLocationCard key={index} office={loc} index={index} setLocation={setLocationIndex} />
+            );
+          })
+        }
+
       </div>
     </div>
   );

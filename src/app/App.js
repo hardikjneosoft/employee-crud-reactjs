@@ -16,9 +16,9 @@ function App() {
       <div className="min-h-screen ">
         <Header></Header>
         {/* <Login className=""/> */}
-        {/* <Learning /> */}
+        <Learning />
         {/* <EmployeeCard /> */}
-        <Employees />
+        {/* <Employees /> */}
         <Footer></Footer>
       </div>
     </>
