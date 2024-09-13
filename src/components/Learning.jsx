@@ -6,12 +6,12 @@ import { useMemo } from "react";
 
 export function Learning() {
   let companyName = "NEOSOFT";
-  const [locationIndex, setLocationIndex] = useState(0);
-  const [city,setCity] = useState('Mumbai')
-  const showAddress = (index) => {
+  const [address, setaddress] = useState('');
+  const [city,setCity] = useState('')
+  const showAddress = (address) => {
     return (
       <>
-        <address>{locations[index].address}</address>
+        <address>{address}</address>
       </>
     );
   };
@@ -80,26 +80,28 @@ export function Learning() {
     return Array.from(citySet);
   }, [locations]);
 
-
   return (
     <div className="p-4">
+      <h4>
+      </h4>
       <h2 className=" text-4xl ">{companyName}</h2>
       <h4 className="my-3 underline">Offices :</h4>
       <select className="p-2 bg-blue-100 rounded-md " onChange={(event)=>{setCity(event.target.value);changeCopyButton(true)}}>
+        <option value=''>All</option>
         {
         cities.map((item,index) => {
           return <option key={index}>{item}</option>;
         })}
       </select>
       <div className="shadow-md shadow-slate-400 m-2 p-2 flex">
-        {copyButton?<Button onClick={()=>changeCopyButton(false)}><ContentCopy /></Button>:<Check style={{color:'green'}}~/>}
-       {showAddress(locationIndex)}
+        {copyButton?<Button onClick={()=>changeCopyButton(false)}><ContentCopy /></Button>:<Check style={{color:'green'}}/>}
+       {showAddress(address)}
       </div>
       <div className="flex flex-wrap gap-4">
         {
           locations.filter((item,index)=>item.city.toLowerCase().includes(city.toLowerCase())).map((loc, index) => {
             return (
-                  <OfficeLocationCard key={index} office={loc} index={index} setLocation={setLocationIndex} />
+                  <OfficeLocationCard key={index} office={loc} index={index} setLocation={setaddress} />
             );
           })
         }

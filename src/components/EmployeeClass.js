@@ -2,12 +2,13 @@
 export default class Employee {
     constructor(
          empId=0,
-         empName="",
+         empName="Hardik Jain",
          joiningDate = new Date(),
-         basicSalary=0,
-         deptCode="",
-         experience=0,
-         pfp='images/dummy-profile.png',
+         basicSalary=10000,
+         deptCode="SD",
+         experience=10,
+         empEmail = 'hardik@neosoftmail.com',
+         pfp='',
          secretCode='123',
          confirmCode='123'
     ){
@@ -16,6 +17,7 @@ export default class Employee {
         this.joiningDate = joiningDate
         this.basicSalary = basicSalary
         this.deptCode = deptCode
+        this.empEmail = empEmail
         this.experience = experience
         this.pfp = pfp
         this.secretCode=secretCode
