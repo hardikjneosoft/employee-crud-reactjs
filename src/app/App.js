@@ -10,6 +10,7 @@ import { Employees } from '../components/Employee';
 import AdminLogin from '../components/AdminLogin';
 /* <React.Fragment> </React.Fragment> */
 import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 export const AppContext = React.createContext()
 
 function App() {
@@ -21,11 +22,7 @@ function App() {
     <AppContext.Provider value={companyName}>  
       <div className="min-h-screen ">
         <Header></Header>
-        {/* <EmployeeForm className=""/> */}
-        <Learning />
-        {/* <EmployeeCard /> */}
-        {/* <Employees /> */}
-        {/* <AdminLogin /> */}
+        <Outlet />
         <Footer></Footer>
       </div>
     </AppContext.Provider>
