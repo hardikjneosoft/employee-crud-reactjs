@@ -12,7 +12,7 @@ export function Navbar() {
   return (
     <>
       <nav className="mr-60 ml-20"><ul className="flex">
-        {navItems.map((item,index)=>{return(<li className="mx-6"><Link to={item.link}>{item.text}</Link></li>)})}
+        {navItems.map((item,index)=>{return(<li key={index} className="mx-6"><Link to={item.link}>{item.text}</Link></li>)})}
       </ul></nav>
     </>
   );

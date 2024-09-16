@@ -8,6 +8,7 @@ import { Learning } from './components/Learning';
 import EmployeeForm from './components/EmployeeForm';
 import { EmployeeCard } from './components/EmployeeCard';
 import AdminLogin from './components/AdminLogin';
+import {getAllEmployee} from '../src/model/EmployeeCRUD.js'
 import { Employees } from './components/Employee';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -25,8 +26,13 @@ const childRoutes = [
     element:<EmployeeForm />
   },
   {
+    path:'employee/edit/:id',
+    element: <EmployeeForm />
+  },
+  {
     path:'employees',
-    element:<Employees />
+    element:<Employees />,
+    loader: ()=> getAllEmployee()
   },
   {
     path:'login/admin',
@@ -46,6 +52,7 @@ const myrouter = createBrowserRouter(routes)
 root.render(
   <React.StrictMode>
     <RouterProvider router={myrouter}></RouterProvider>
+
   </React.StrictMode>
 );
 // If you want to start measuring performance in your app, pass a function

@@ -3,7 +3,7 @@ export default class Employee {
     constructor(
          empId=0,
          empName="Hardik Jain",
-         joiningDate = new Date(),
+         joiningDate = new Date().toISOString().split('T')[0],
          basicSalary=10000,
          deptCode="SD",
          experience=10,
